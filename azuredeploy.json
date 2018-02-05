@@ -2,9 +2,8 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "location": {
-            "type": "string",
-            "defaultValue": "westus2"
+        "VMLocation": {
+            "type": "string"
         },
         "virtualMachineName": {
             "type": "string"
@@ -46,7 +45,7 @@
         "publicIpAddressType": "Dynamic",
         "publicIpAddressSku": "Basic",
         "publicIpAddressDNS": "variables('uniqueId')",
-        "vnetId": "[resourceId('vm-rg','Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+        "vnetId": "[resourceId(resourceGroup().id,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
     },
     "resources": [
@@ -54,7 +53,7 @@
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2016-04-30-preview",
-            "location": "[parameters('location')]",
+            "location": "[parameters('VMLocation')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
             ],
@@ -95,7 +94,7 @@
             "name": "[parameters('virtualNetworkName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2017-08-01",
-            "location": "[parameters('location')]",
+            "location": "[parameters('VMLocation')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -116,7 +115,7 @@
             "name": "[parameters('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2016-09-01",
-            "location": "[parameters('location')]",
+            "location": "[parameters('VMLocation')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
                 "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]",
@@ -132,13 +131,13 @@
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIpAddress": {
-                                "id": "[resourceId('vm-rg','Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]"
+                                "id": "[resourceId(resourceGroup().id,'Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]"
                             }
                         }
                     }
                 ],
                 "networkSecurityGroup": {
-                    "id": "[resourceId('vm-rg', 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                    "id": "[resourceId(resourceGroup().id, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
                 }
             }
         },
@@ -146,7 +145,7 @@
             "name": "[parameters('publicIpAddressName')]",
             "type": "Microsoft.Network/publicIpAddresses",
             "apiVersion": "2017-08-01",
-            "location": "[parameters('location')]",
+            "location": "[parameters('VMLocation')]",
             "properties": {
                 "publicIpAllocationMethod": "[parameters('publicIpAddressType')]",
                 "dnsSettings": {
@@ -161,7 +160,7 @@
             "name": "[parameters('networkSecurityGroupName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2017-06-01",
-            "location": "[parameters('location')]",
+            "location": "[parameters('VMLocation')]",
             "properties": {
                 "securityRules": [
                     {
