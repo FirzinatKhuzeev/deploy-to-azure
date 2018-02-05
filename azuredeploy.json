@@ -43,7 +43,7 @@
         }
     },
     "variables": {
-        "artifactsBaseUrl": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/",
+        "artifactsBaseUrl": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/deployment/",
         "uniqueId": "[uniqueString(resourceGroup().id, deployment().name)]",
         "virtualNetworkName": "[concat('vnet-', variables('uniqueId'))]",
         "networkInterfaceName": "[concat('net-interface-', variables('uniqueId'))]",
@@ -97,7 +97,28 @@
                         }
                     ]
                 }
-            }
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-06-15",
+                    "type": "extensions",
+                    "name": "CustomScript",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [
+                        "[parameters('virtualMachineName')]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.0",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": "[concat(variables('artifactsBaseUrl'), 'post-install.sh')]",
+                            "commandToExecute": "bash post-install.sh"
+                        }
+                    }
+                }
+            ]
         },
         {
             "name": "[variables('virtualNetworkName')]",
