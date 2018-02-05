@@ -13,7 +13,7 @@ sudo dpkg --configure -a
 sudo apt-get update -y
 sudo dpkg --configure -a
 sudo apt-get update -y
-#sudo apt-get upgrade -y
+sudo apt-get upgrade -y
 
 # Install xRDP
 sudo apt-get install xrdp -y
@@ -55,5 +55,3 @@ sudo chmod -R 755 $path
 sudo chown -R $userName:users $path
 
 echo "Done"
-
-sudo reboot
