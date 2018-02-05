@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westus2"
+        },
+        "virtualMachineName": {
+            "value": "vm-name"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_NV12"
+        },
+        "adminUsername": {
+            "value": "vmadmin"
+        },
+        "virtualNetworkName": {
+            "value": "vm-rg-vnet"
+        },
+        "networkInterfaceName": {
+            "value": "vm-name752"
+        },
+        "networkSecurityGroupName": {
+            "value": "vm-name-nsg"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "addressPrefix": {
+            "value": "10.0.1.0/24"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "subnetPrefix": {
+            "value": "10.0.1.0/24"
+        },
+        "publicIpAddressName": {
+            "value": "vm-name-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        }
+    }
+}
