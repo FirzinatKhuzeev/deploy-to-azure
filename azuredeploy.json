@@ -164,7 +164,7 @@
                         ]
                     },
                     "commandToExecute": {
-                        "value": "[concat('bash post-install.sh -u ', parameters('adminUsername'))]"
+                        "value": "[concat('bash post-install.sh ', parameters('adminUsername'))]"
                     }
                 }
             },
