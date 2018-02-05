@@ -45,7 +45,7 @@
         "publicIpAddressType": "Dynamic",
         "publicIpAddressSku": "Basic",
         "publicIpAddressDNS": "variables('uniqueId')",
-        "vnetId": "[resourceId(resourceGroup().id,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+        "vnetId": "[resourceId('vm-','Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
     },
     "resources": [
@@ -53,7 +53,7 @@
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2016-04-30-preview",
-            "location": "[parameters('virtualMachineLocation')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
             ],
@@ -94,7 +94,7 @@
             "name": "[parameters('virtualNetworkName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2017-08-01",
-            "location": "[parameters('virtualMachineLocation')]",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -115,7 +115,7 @@
             "name": "[variables('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2016-09-01",
-            "location": "[parameters('virtualMachineLocation')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
                 "[concat('Microsoft.Network/publicIpAddresses/', variables('publicIpAddressName'))]",
@@ -131,13 +131,13 @@
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIpAddress": {
-                                "id": "[resourceId(resourceGroup().id,'Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]"
+                                "id": "[resourceId('vm-','Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]"
                             }
                         }
                     }
                 ],
                 "networkSecurityGroup": {
-                    "id": "[resourceId(resourceGroup().id, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                    "id": "[resourceId('vm-', 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
                 }
             }
         },
@@ -145,7 +145,7 @@
             "name": "[variables('publicIpAddressName')]",
             "type": "Microsoft.Network/publicIpAddresses",
             "apiVersion": "2017-08-01",
-            "location": "[parameters('virtualMachineLocation')]",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "publicIpAllocationMethod": "[variables('publicIpAddressType')]",
                 "dnsSettings": {
@@ -160,7 +160,7 @@
             "name": "[variables('networkSecurityGroupName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2017-06-01",
-            "location": "[parameters('virtualMachineLocation')]",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
                     {
