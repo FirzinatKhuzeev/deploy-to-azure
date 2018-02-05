@@ -1,17 +1,10 @@
 #!/bin/bash
 
 # Remove lock
-sudo killall apt
-sudo rm /var/lib/dpkg/lock
-sudo rm /var/lib/apt/lists/lock
-sudo rm /var/cache/apt/archives/lock
-sudo fuser -vki /var/lib/dpkg/lock
-sudo apt-get update -y
-sudo dpkg --configure -a
+rm /var/lib/dpkg/lock
+dpkg --configure -a
 
 # Update
-sudo apt-get update -y
-sudo dpkg --configure -a
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
@@ -40,18 +33,16 @@ sudo service xrdp restart
 # sudo apt-get install cuda-8-0 cuda-toolkit-8-0 -y
 
 # Install Blender
-sudo apt-get install blender unzip -y
+sudo apt-get install blender -y
 
 # Download blender example
-userName=$1
-path="/home/$userName/blender-example"
-sudo mkdir $path
+
 wget https://download.blender.org/demo/test/BMW27_2.blend.zip
-
+sudo apt-get install unzip -y
+sudo mkdir /opt/blender-example
 unzip ./BMW27_2.blend.zip
-sudo cp ./bmw27/* $path
-
-sudo chmod -R 755 $path
-sudo chown -R $userName:users $path
+sudo cp ./bmw27/* /opt/blender-example
+sudo chmod -R 777 /opt/blender-example
+sudo chown -R :users /opt/blender-example
 
 echo "Done"

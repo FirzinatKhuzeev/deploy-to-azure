@@ -2,7 +2,7 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "location": {
+        "location":{
             "type": "string",
             "defaultValue": "West US 2",
             "allowedValues": [
@@ -96,7 +96,7 @@
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
             ],
-            "plan": {
+            "plan":{
                 "name": "linuxdsvmubuntu",
                 "publisher": "microsoft-ads",
                 "product": "linux-data-science-vm-ubuntu"
@@ -164,7 +164,7 @@
                         ]
                     },
                     "commandToExecute": {
-                        "value": "[concat('bash post-install.sh ',parameters('adminUsername'),' ')]"
+                        "value": "bash post-install.sh"
                     }
                 }
             },
