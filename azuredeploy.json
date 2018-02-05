@@ -86,7 +86,7 @@
                     "osDisk": {
                         "createOption": "fromImage",
                         "managedDisk": {
-                            "storageAccountType": "Standard"
+                            "storageAccountType": "Standard_LRS"
                         }
                     },
                     "dataDisks": [
