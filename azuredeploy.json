@@ -2,9 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "location": {
-            "type": "string"
-        },
         "virtualMachineName": {
             "type": "string"
         },
@@ -63,10 +60,15 @@
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2016-04-30-preview",
-            "location": "[parameters('location')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
             ],
+            "plan":{
+                "name": "linuxdsvmubuntu",
+                "publisher": "microsoft-ads",
+                "product": "linux-data-science-vm-ubuntu"
+            },
             "properties": {
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineName')]",
