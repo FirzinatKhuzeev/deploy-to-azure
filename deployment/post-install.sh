@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Remove lock
-rm /var/lib/dpkg/lock
-dpkg --configure -a
+sudo rm /var/lib/dpkg/lock
+sudo dpkg --configure -a
 
 # Update
 sudo apt-get update -y
@@ -48,3 +48,5 @@ sudo chmod -R 755 $path
 sudo chown -R $userName:users $path
 
 echo "Done"
+
+sudo reboot
