@@ -12,11 +12,11 @@ sudo apt-get upgrade -y
 sudo apt-get install xrdp -y
 
 # Install XFCE
-#sudo apt-get install xfce4 xfce4-terminal build-essential -y
+# sudo apt-get install xfce4 xfce4-terminal build-essential -y
 
 # Configure XFCE
-# echo xfce4-session >~/.xsession
-# sudo sed -i.bak '/fi/a startxfce4\n' /etc/xrdp/startwm.sh
+echo xfce4-session >~/.xsession
+sudo sed -i.bak '/fi/a startxfce4\n' /etc/xrdp/startwm.sh
 sudo /etc/init.d/xrdp start
 sudo service xrdp restart
 
@@ -36,6 +36,6 @@ sudo service xrdp restart
 sudo apt-get install blender -y
 
 # Download blender example
-wget https://download.blender.org/demo/test/BMW27_2.blend.zip
+wget -O /tmp/blender-example https://download.blender.org/demo/test/BMW27_2.blend.zip
 sudo apt-get install unzip -y
-unzip BMW27_2.blend.zip
+unzip /tmp/blender-example/BMW27_2.blend.zip
