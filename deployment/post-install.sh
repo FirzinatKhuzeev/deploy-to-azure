@@ -36,6 +36,11 @@ sudo service xrdp restart
 sudo apt-get install blender -y
 
 # Download blender example
-wget -O /tmp/blender-example https://download.blender.org/demo/test/BMW27_2.blend.zip
+
+wget https://download.blender.org/demo/test/BMW27_2.blend.zip
 sudo apt-get install unzip -y
-unzip /tmp/blender-example/BMW27_2.blend.zip
+sudo mkdir /opt/blender-example
+unzip ./BMW27_2.blend.zip
+sudo cp ./bmw27/* /opt/blender-example
+
+echo "Done"
