@@ -44,7 +44,6 @@
         "publicIpAddressName": "[concat('ip-', variables('uniqueId'))]",
         "publicIpAddressType": "Dynamic",
         "publicIpAddressSku": "Basic",
-        "publicIpAddressDNS": "variables('uniqueId')",
         "vnetId": "[resourceId('vm-','Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
     },
@@ -147,10 +146,7 @@
             "apiVersion": "2017-08-01",
             "location": "[resourceGroup().location]",
             "properties": {
-                "publicIpAllocationMethod": "[variables('publicIpAddressType')]",
-                "dnsSettings": {
-                    "domainNameLabel": "[variables('publicIpAddressDNS')]"
-                }
+                "publicIpAllocationMethod": "[variables('publicIpAddressType')]"
             },
             "sku": {
                 "name": "[variables('publicIpAddressSku')]"
@@ -197,10 +193,6 @@
         "adminUsername": {
             "type": "string",
             "value": "[parameters('adminUsername')]"
-        },
-        "dnsPrefix": {
-            "type": "string",
-            "value": "[variables('publicIpAddressDNS')]"
         }
     }
 }
