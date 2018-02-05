@@ -2,11 +2,17 @@
 
 # Remove lock
 sudo rm /var/lib/dpkg/lock
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo fuser -vki /var/lib/dpkg/lock
+sudo apt-get update -y
 sudo dpkg --configure -a
 
 # Update
 sudo apt-get update -y
-sudo apt-get upgrade -y
+sudo dpkg --configure -a
+sudo apt-get update -y
+#sudo apt-get upgrade -y
 
 # Install xRDP
 sudo apt-get install xrdp -y
