@@ -91,7 +91,7 @@
             }
         },
         {
-            "name": "[parameters('virtualNetworkName')]",
+            "name": "[variable('virtualNetworkName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2017-08-01",
             "location": "[resourceGroup().location]",
