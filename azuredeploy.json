@@ -78,18 +78,26 @@
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "publisher": "Canonical",
-                        "offer": "UbuntuServer",
-                        "sku": "16.04-LTS",
+                        "publisher": "microsoft-ads",
+                        "offer": "linux-data-science-vm-ubuntu",
+                        "sku": "linuxdsvmubuntu",
                         "version": "latest"
                     },
                     "osDisk": {
                         "createOption": "fromImage",
                         "managedDisk": {
-                            "storageAccountType": "Standard_LRS"
+                            "storageAccountType": "Premium_LRS"
                         }
                     },
-                    "dataDisks": []
+                    "dataDisks": [
+                        {
+                            "createOption": "fromImage",
+                            "lun": 0,
+                            "managedDisk": {
+                                "storageAccountType": "Premium_LRS"
+                            }
+                        }
+                    ]
                 },
                 "networkProfile": {
                     "networkInterfaces": [
