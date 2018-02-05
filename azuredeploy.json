@@ -44,6 +44,7 @@
     },
     "variables": {
         "artifactsBaseUrl": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/deployment/",
+        "postInstallFileUrl": "[concat(variables('artifactsBaseUrl'), 'post-install.sh')]",
         "uniqueId": "[uniqueString(resourceGroup().id, deployment().name)]",
         "virtualNetworkName": "[concat('vnet-', variables('uniqueId'))]",
         "networkInterfaceName": "[concat('net-interface-', variables('uniqueId'))]",
@@ -113,7 +114,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "fileUris": "[split([concat(variables('artifactsBaseUrl'), 'post-install.sh')], ' ')]",
+                            "fileUris": "[split(variables('postInstallFileUrl'), ' ')]",
                             "commandToExecute": "bash post-install.sh"
                         }
                     }
