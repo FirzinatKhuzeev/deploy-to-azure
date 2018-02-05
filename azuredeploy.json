@@ -3,7 +3,8 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "westus2"
         },
         "virtualMachineName": {
             "type": "string"
@@ -23,46 +24,30 @@
                 "Standard_ND6s",
                 "Standard_ND12s",
                 "Standard_ND24s"
-            ]
+            ],
+            "defaultValue": "Standard_NV6"
         },
         "adminUsername": {
             "type": "string"
         },
-        "virtualNetworkName": {
-            "type": "string"
-        },
-        "networkInterfaceName": {
-            "type": "string"
-        },
-        "networkSecurityGroupName": {
-            "type": "string"
-        },
         "adminPassword": {
             "type": "securestring"
-        },
-        "addressPrefix": {
-            "type": "string"
-        },
-        "subnetName": {
-            "type": "string"
-        },
-        "subnetPrefix": {
-            "type": "string"
-        },
-        "publicIpAddressName": {
-            "type": "string"
-        },
-        "publicIpAddressType": {
-            "type": "string"
-        },
-        "publicIpAddressSku": {
-            "type": "string"
         }
     },
     "variables": {
-        "vnetId": "[resourceId('vm-rg','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
-        "dnsPrefix": "[uniqueString(resourceGroup().id, deployment().name)]"
+        "uniqueId": "[uniqueString(resourceGroup().id, deployment().name)]",
+        "virtualNetworkName": "[concat('vnet-', variables('uniqueId'))]",
+        "networkInterfaceName": "[concat('net-interface-', variables('uniqueId'))]",
+        "networkSecurityGroupName": "[concat('nsg-', variables('uniqueId'))]",
+        "addressPrefix": "10.0.1.0/24",
+        "subnetName": "default",
+        "subnetPrefix": "10.0.1.0/24",
+        "publicIpAddressName": "[concat('ip-', variables('uniqueId'))]",
+        "publicIpAddressType": "Dynamic",
+        "publicIpAddressSku": "Basic",
+        "publicIpAddressDNS": "variables('uniqueId')",
+        "vnetId": "[resourceId('vm-rg','Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
     },
     "resources": [
         {
@@ -165,7 +150,7 @@
             "properties": {
                 "publicIpAllocationMethod": "[parameters('publicIpAddressType')]",
                 "dnsSettings": {
-                    "domainNameLabel": "[variables('dnsPrefix')]"
+                    "domainNameLabel": "[variables('publicIpAddressDNS')]"
                 }
             },
             "sku": {
@@ -216,7 +201,7 @@
         },
         "dnsPrefix": {
             "type": "string",
-            "value": "[parameters('dnsPrefix')]"
+            "value": "[parameters('publicIpAddressDNS')]"
         }
     }
 }
