@@ -33,14 +33,18 @@ sudo service xrdp restart
 # sudo apt-get install cuda-8-0 cuda-toolkit-8-0 -y
 
 # Install Blender
-sudo apt-get install blender -y
+sudo apt-get install blender unzip -y
 
 # Download blender example
-
+userName=$1
+path="/home/$userName/blender-example"
+sudo mkdir $path
 wget https://download.blender.org/demo/test/BMW27_2.blend.zip
-sudo apt-get install unzip -y
-sudo mkdir /opt/blender-example
+
 unzip ./BMW27_2.blend.zip
-sudo cp ./bmw27/* /opt/blender-example
+sudo cp ./bmw27/* $path
+
+sudo chmod -R 755 $path
+sudo chown -R $userName:users $path
 
 echo "Done"
