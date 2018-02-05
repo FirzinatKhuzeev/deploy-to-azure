@@ -94,7 +94,7 @@
                             "createOption": "fromImage",
                             "lun": 0,
                             "managedDisk": {
-                                "storageAccountType": "Premium_LRS"
+                                "storageAccountType": "Standard_LRS"
                             }
                         }
                     ]
