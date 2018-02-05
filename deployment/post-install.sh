@@ -7,7 +7,7 @@
 # Update
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
+#sudo apt-get dist-upgrade -y
 
 # Install xRDP
 sudo apt-get install xrdp -y
@@ -36,4 +36,4 @@ sudo service xrdp restart
 # Install Blender
 sudo apt-get install blender -y
 
-sudo reboot
+# sudo reboot

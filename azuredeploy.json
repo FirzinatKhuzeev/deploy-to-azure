@@ -98,27 +98,36 @@
                         }
                     ]
                 }
-            },
-            "resources": [
-                {
-                    "apiVersion": "2015-06-15",
-                    "type": "extensions",
-                    "name": "CustomScript",
-                    "location": "[resourceGroup().location]",
-                    "dependsOn": [
-                        "[parameters('virtualMachineName')]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Azure.Extensions",
-                        "type": "CustomScript",
-                        "typeHandlerVersion": "2.0",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "fileUris": "[split(variables('postInstallFileUrl'), ' ')]",
-                            "commandToExecute": "bash post-install.sh"
-                        }
+            }
+        },
+        {
+            "name": "microsoft.custom-script-linux",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "https://gallery.azure.com/artifact/20161101/microsoft.custom-script-linux-arm.2.0.50/Artifacts/MainTemplate.json"
+                },
+                "parameters": {
+                    "vmName": {
+                        "value": "[parameters('virtualMachineName')]"
+                    },
+                    "location": {
+                        "value": "[resourceGroup().location]"
+                    },
+                    "fileUris": {
+                        "value": [
+                            "[variables('postInstallFileUrl')]"
+                        ]
+                    },
+                    "commandToExecute": {
+                        "value": "bash post-install.sh"
                     }
                 }
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
             ]
         },
         {
