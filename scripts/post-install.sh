@@ -11,7 +11,8 @@ i=0
 while (fuser /var/lib/dpkg/lock > /dev/null 2>&1); do
     sleep 30
     ((i=i+1))
-    if ((i > 60)) then
+    if ((i > 60))
+    then
         echo "    Waiting failed after 30m."
         ps axf | grep apt | grep -v grep | grep -v waitForApt | awk '{print "sudo kill -9 " $1}' | sh
         echo "    Cleaning up..."
