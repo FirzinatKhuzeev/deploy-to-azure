@@ -3,8 +3,8 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string",
             "defaultValue": "West US 2",
+            "type": "string",
             "allowedValues": [
                 "Australia East",
                 "Australia Southeast",
