@@ -2,7 +2,7 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "location":{
+        "location": {
             "type": "string",
             "defaultValue": "West US 2",
             "allowedValues": [
@@ -69,11 +69,13 @@
             "metadata": {
                 "description": "Administrator password for the virtual machines and the Active Directory domain"
             }
+        },
+        "artifactsBaseUrl": {
+            "type":"string",
+            "defaultValue": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master"
         }
     },
     "variables": {
-        "artifactsBaseUrl": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/deployment/",
-        "postInstallFileUrl": "[concat(variables('artifactsBaseUrl'), 'post-install.sh')]",
         "uniqueId": "[uniqueString(resourceGroup().id, deployment().name)]",
         "virtualNetworkName": "[concat('vnet-', variables('uniqueId'))]",
         "networkInterfaceName": "[concat('net-interface-', variables('uniqueId'))]",
@@ -96,7 +98,7 @@
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
             ],
-            "plan":{
+            "plan": {
                 "name": "linuxdsvmubuntu",
                 "publisher": "microsoft-ads",
                 "product": "linux-data-science-vm-ubuntu"
@@ -143,34 +145,25 @@
             }
         },
         {
-            "name": "microsoft.custom-script-linux",
-            "apiVersion": "2015-01-01",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "incremental",
-                "templateLink": {
-                    "uri": "https://gallery.azure.com/artifact/20161101/microsoft.custom-script-linux-arm.2.0.50/Artifacts/MainTemplate.json"
-                },
-                "parameters": {
-                    "vmName": {
-                        "value": "[parameters('virtualMachineName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "fileUris": {
-                        "value": [
-                            "[variables('postInstallFileUrl')]"
-                        ]
-                    },
-                    "commandToExecute": {
-                        "value": "bash post-install.sh"
-                    }
-                }
-            },
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('virtualMachineName'),'/installcustomscript')]",
+            "apiVersion": "2015-05-01-preview",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-            ]
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": [
+                        "[concat(parameters('artifactsBaseUrl'), '/scripts/post-install.sh')]"
+                    ],
+                    "commandToExecute": "bash post-install.sh"
+                }
+            }
         },
         {
             "name": "[variables('virtualNetworkName')]",

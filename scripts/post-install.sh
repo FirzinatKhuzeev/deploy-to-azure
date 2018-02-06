@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Remove lock
-sudo rm /var/lib/dpkg/lock
-sudo dpkg --configure -a
+#rm /var/lib/dpkg/lock
+#dpkg --configure -a
 
 # Update
 sudo apt-get update -y
