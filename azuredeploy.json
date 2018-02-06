@@ -71,7 +71,7 @@
             }
         },
         "artifactsBaseUrl": {
-            "type":"string",
+            "type": "string",
             "defaultValue": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master"
         }
     },
@@ -148,7 +148,7 @@
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('virtualMachineName'),'/installcustomscript')]",
             "apiVersion": "2015-05-01-preview",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
             ],
