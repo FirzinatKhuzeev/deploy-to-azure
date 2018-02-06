@@ -159,7 +159,9 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "[concat(parameters('artifactsBaseUrl'), '/scripts/post-install.sh')]"
+                        "[concat(parameters('artifactsBaseUrl'), '/scripts/post-install.sh')]",
+                        "[concat(parameters('artifactsBaseUrl'), '/scripts/dependencies-install.sh')]",
+                        "[concat(parameters('artifactsBaseUrl'), '/scripts/app-install.sh')]"
                     ],
                     "commandToExecute": "bash post-install.sh"
                 }
