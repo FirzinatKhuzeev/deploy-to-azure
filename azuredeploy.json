@@ -4,7 +4,35 @@
     "parameters": {
         "location": {
             "type": "string",
-            "defaultValue": "[resourceGroup().location]"
+            "defaultValue": "West US 2",
+            "allowedValues": [
+                "Australia East",
+                "Australia Southeast",
+                "Brazil South",
+                "Canada Central",
+                "Canada East",
+                "Central India",
+                "Central US",
+                "East Asia",
+                "East US 2",
+                "East US",
+                "Japan East",
+                "Japan West",
+                "Korea Central",
+                "Korea South",
+                "North Central US",
+                "North Europe",
+                "South Central US",
+                "South India",
+                "Southeast Asia",
+                "UK South",
+                "UK West",
+                "West Central US",
+                "West Europe",
+                "West India",
+                "West US 2",
+                "West US"
+            ]
         },
         "virtualMachineName": {
             "type": "string"
