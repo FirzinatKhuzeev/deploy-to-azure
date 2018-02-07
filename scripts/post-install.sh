@@ -3,39 +3,47 @@
 echo "Starting install on pid $$"
 date
 
-if (fuser /var/lib/dpkg/lock > /dev/null 2>&1)
-    then echo "/var/lib/dpkg/lock is locked"
-fi
+ps axf | grep apt | grep -v grep | grep -v waitForApt | awk '{print "sudo kill -9 " $1}' | sh
+sudo rm /var/lib/apt/lists/lock -f
+sudo rm /var/cache/apt/archives/lock -f
+sudo rm /var/lib/dpkg/lock -f
+sudo dpkg --configure -a
+sudo apt-get update -y
+sudo apt-get -f install
 
-i=0
-while (fuser /var/lib/dpkg/lock > /dev/null 2>&1); do
-    sleep 30
-    ((i=i+1))
-    if ((i > 60))
-    then
-        echo "Waiting failed after 30m."
-        ps axf | grep apt | grep -v grep | grep -v waitForApt | awk '{print "sudo kill -9 " $1}' | sh
-        echo "Cleaning up..."
-        sudo rm /var/lib/apt/lists/lock -f
-        sudo rm /var/cache/apt/archives/lock -f
-        sudo rm /var/lib/dpkg/lock -f
-        break
-    fi
-done
+# if (fuser /var/lib/dpkg/lock > /dev/null 2>&1)
+#     then echo "/var/lib/dpkg/lock is locked"
+# fi
+
+# i=0
+# while (fuser /var/lib/dpkg/lock > /dev/null 2>&1); do
+#     sleep 30
+#     ((i=i+1))
+#     if ((i > 60))
+#     then
+#         echo "Waiting failed after 30m."
+#         ps axf | grep apt | grep -v grep | grep -v waitForApt | awk '{print "sudo kill -9 " $1}' | sh
+#         echo "Cleaning up..."
+#         sudo rm /var/lib/apt/lists/lock -f
+#         sudo rm /var/cache/apt/archives/lock -f
+#         sudo rm /var/lib/dpkg/lock -f
+#         break
+#     fi
+# done
 
 echo "Updating..."
 date
 
 # Update
 sudo apt-get update -y
-sudo apt-get upgrade -y
+# sudo apt-get upgrade -y
 
 # Install xRDP
 sudo apt-get install xrdp -y
 sudo ufw allow 3389/tcp
 
 # Install XFCE
-sudo apt-get install xfce4 -y
+# sudo apt-get install xfce4 -y
 
 # Configure XFCE
 echo xfce4-session >~/.xsession
