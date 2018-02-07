@@ -9,7 +9,10 @@ log "Starting post install on pid $$"
 
 log "Start removing locks"
 
+sudo apt-get update -y
+
 ps axf | grep apt | grep -v grep | awk '{print "sudo kill -9 " $1}' | sh
+sudo rm /var/lib/apt/lists/* -vf
 sudo rm /var/lib/apt/lists/lock -f
 sudo rm /var/cache/apt/archives/lock -f
 sudo rm /var/lib/dpkg/lock -f
