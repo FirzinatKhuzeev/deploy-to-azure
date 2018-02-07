@@ -9,7 +9,7 @@ sudo rm /var/cache/apt/archives/lock -f
 sudo rm /var/lib/dpkg/lock -f
 sudo dpkg --configure -a
 sudo apt-get update -y
-sudo apt-get -f install
+sudo apt-get -f install -y
 
 # if (fuser /var/lib/dpkg/lock > /dev/null 2>&1)
 #     then echo "/var/lib/dpkg/lock is locked"
