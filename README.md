@@ -1,5 +1,14 @@
 # Deploy to Azure
 
+This Azure deployment demonstrates capaAzure N-Series VMs.
+During the deployment, the following actions will take place:
+
+ - Install Blender ([https://www.blender.org](https://www.blender.org))
+ - Donload Blender sample file to this directory: /opt/blender/...
+ - Install GPU drivers
+
+Log files for the post deployment installations could be found here: /var/lib/waagent/custom-script .
+
 
 
 
