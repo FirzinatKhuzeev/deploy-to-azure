@@ -2,15 +2,17 @@
 
 
 This Azure deployment demonstrates capabilities of Azure N-Series VMs.
-During the deployment, the following actions will take place:
+During the deployment, the following actions will be perfromed by the postdeployment script:
 
- - Install Blender ([https://www.blender.org](https://www.blender.org))
- - Download Blender sample file to this directory: /opt/blender/TBD
- - Install GPU drivers
+ - Installation of Blender software ([https://www.blender.org](https://www.blender.org))
+ - Download a sample file (will be downloaded here /opt/blender/TBD)
+ - Installatino drivers for GPU
+ 
 Note: Ubuntu Data Science VM Image is used for the deployment.
 
 Log files for the post deployment installations could be found here: /var/lib/waagent/custom-script .
-After deployment completes:
+
+Follow these steps when deployment completes:
 
  - RDP to the VM using public IP address which is available via Azure Portal ([https://portal.azure.com](https://portal.azure.com/#)) . Use login and password you entered during the deployment process.
  - Open in a File Manager folder: /opt/blender-example/
