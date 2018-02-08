@@ -1,4 +1,4 @@
-# Deploy to Azure
+# Deploy N Series VM to Azure
 
 
 This Azure deployment demonstrates capabilities of Azure N-Series VMs.
