@@ -5,7 +5,7 @@ This Azure deployment demonstrates capabilities of Azure N-Series VMs.
 During the deployment, the following actions will take place:
 
  - Install Blender ([https://www.blender.org](https://www.blender.org))
- - Donload Blender sample file to this directory: /opt/blender/...
+ - Download Blender sample file to this directory: /opt/blender/TBD
  - Install GPU drivers
 Note: Ubuntu Data Science VM Image is used for the deployment.
 
