@@ -13,7 +13,7 @@ Log files for the post deployment installations could be found here: /var/lib/wa
 After deployment completes:
 
  - RDP to the VM using public IP address which is available via Azure Portal ([https://portal.azure.com](https://portal.azure.com/#)) . Use login and password you entered during the deployment process.
- - Open in a File Manager  the folder: /opt/blender-example/
+ - Open in a File Manager folder: /opt/blender-example/
  - Open the example file: bmw27_gpu.blen
  - Click  "render" button on the right side 
 
