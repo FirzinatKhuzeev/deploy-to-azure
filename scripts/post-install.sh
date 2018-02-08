@@ -1,5 +1,8 @@
 #!/bin/bash
 
+userName=$1
+repositoryUrl="https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/config/"
+
 log() {
     echo "[post-install] $1"
     date
@@ -42,14 +45,23 @@ sudo service xrdp restart
 log "Install Blender"
 sudo apt-get install blender -y
 
+log "Configure Blender's preferences"
+wget $repositoryUrl/userpref.tar
+prefPath="/home/$userName/.config/blender/2.76/config"
+tar -xvf userpref.tar
+sudo mkdir -p $prefPath
+sudo cp userpref.blend $prefPath
+sudo chmod -R 777 $prefPath
+sudo chown -R :users $prefPath
+
 log "Install UnZip"
 sudo apt-get install unzip -y
 
 log "Download Blender example"
 wget https://download.blender.org/demo/test/BMW27_2.blend.zip
-bldPath="/opt/blender-example"
-sudo mkdir $bldPath
 unzip ./BMW27_2.blend.zip
+bldPath="/home/$userName"
+sudo mkdir $bldPath
 sudo cp ./bmw27/* $bldPath
 sudo chmod -R 777 $bldPath
 sudo chown -R :users $bldPath
