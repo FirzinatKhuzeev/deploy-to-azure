@@ -43,13 +43,13 @@ log "Install Blender"
 sudo apt-get install blender -y
 
 log "Configure Blender's preferences"
-# wget $repositoryUrl/userpref.tar
-# prefPath="/home/$userName/.config/blender/2.76/config"
-# tar -xvf userpref.tar
-# sudo mkdir -p $prefPath
-# sudo cp userpref.blend $prefPath
-# sudo chmod -R 777 $prefPath
-# sudo chown -R :users $prefPath
+wget $repositoryUrl/userpref.tar
+prefPath="/home/$userName/.config/blender/2.76/config"
+tar -xvf userpref.tar
+sudo mkdir -p $prefPath
+sudo cp userpref.blend $prefPath
+sudo chmod -R 775 /home/$userName/.config/*
+sudo chown -R $userName:$userName /home/$userName/.config/*
 
 log "Install UnZip"
 sudo apt-get install unzip -y
