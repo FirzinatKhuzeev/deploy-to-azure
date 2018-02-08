@@ -11,9 +11,7 @@ log() {
 log "Starting post install on pid $$"
 
 log "Start removing locks"
-
 sudo apt-get update -y
-
 ps axf | grep apt | grep -v grep | awk '{print "sudo kill -9 " $1}' | sh
 sudo rm /var/lib/apt/lists/* -vf
 sudo rm /var/lib/apt/lists/lock -f
@@ -22,7 +20,6 @@ sudo rm /var/lib/dpkg/lock -f
 sudo dpkg --configure -a
 sudo apt-get update -y
 sudo apt-get -f install -y
-
 log "Completed the removal of locks"
 
 log "Update package database"
@@ -60,7 +57,7 @@ sudo apt-get install unzip -y
 log "Download Blender example"
 wget https://download.blender.org/demo/test/BMW27_2.blend.zip
 unzip ./BMW27_2.blend.zip
-bldPath="/home/$userName"
+bldPath="/home/$userName/blender-example"
 sudo mkdir $bldPath
 sudo cp ./bmw27/* $bldPath
 sudo chmod -R 777 $bldPath
