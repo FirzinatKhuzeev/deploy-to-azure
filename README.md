@@ -4,7 +4,7 @@ During the deployment, the following actions will be perfromed by the postdeploy
 
  - Installation of Blender software ([https://www.blender.org](https://www.blender.org))
  - Download a sample file (will be downloaded here `/home/[username]/blender-example/TBD`)
- - Installatino drivers for GPU
+ - Installation of drivers for GPU
  
 > Note: [Ubuntu Data Science VM Image](http://aka.ms/dsvm/overview) is used for the deployment.
 
@@ -21,6 +21,7 @@ The image will start to render using GPU.
 
 Troubleshooting:  
 Make sure that **CUDA** is selected as **Compute Device** under **System Settings** within **User Preferences**.
+The deployments is currnetly not working for -	NC-Series VMs. Only NCv2, NV, ND series are supported.
 
 # Deployment  
 
