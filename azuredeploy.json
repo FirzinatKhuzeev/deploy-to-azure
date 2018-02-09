@@ -284,6 +284,10 @@
         "adminUsername": {
             "type": "string",
             "value": "[parameters('adminUsername')]"
+        },
+        "ipaddress": {
+            "value": "[reference(variables('publicIpAddressName')).ipAddress]",
+            "type": "string"
         }
     }
 }
