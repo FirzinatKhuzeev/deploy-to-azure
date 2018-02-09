@@ -37,6 +37,17 @@
         "virtualMachineName": {
             "type": "string"
         },
+        "virtualMachineDiskType": {
+            "type": "string",
+            "defaultValue": "HDD",
+            "allowedValues": [
+                "SSD",
+                "HDD"
+            ],
+            "metadata": {
+                "description": "Premium disks (SSD) are backed by solid state drives and offer consistent, low-latency performance. Standard disks (HDD) are backed by magnetic drives and are preferable for applications where data is accessed infrequently."
+            }
+        },
         "virtualMachineSize": {
             "type": "string",
             "defaultValue": "Standard_NV6",
@@ -76,6 +87,10 @@
         }
     },
     "variables": {
+        "vmDiskType": {
+            "SSD": "Premium_LRS",
+            "HDD": "Standard_LRS"
+        },
         "uniqueId": "[uniqueString(resourceGroup().id, deployment().name)]",
         "virtualNetworkName": "[concat('vnet-', variables('uniqueId'))]",
         "networkInterfaceName": "[concat('net-interface-', variables('uniqueId'))]",
@@ -120,17 +135,17 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "createOption": "fromImage",
+                        "createOption": "FromImage",
                         "managedDisk": {
-                            "storageAccountType": "Standard_LRS"
+                            "storageAccountType": "[variables('vmDiskType')[parameters('virtualMachineDiskType')]]"
                         }
                     },
                     "dataDisks": [
                         {
-                            "createOption": "fromImage",
+                            "createOption": "FromImage",
                             "lun": 0,
                             "managedDisk": {
-                                "storageAccountType": "Standard_LRS"
+                                "storageAccountType": "[variables('vmDiskType')[parameters('virtualMachineDiskType')]]"
                             }
                         }
                     ]
