@@ -50,6 +50,7 @@ sudo mkdir -p $prefPath
 sudo cp userpref.blend $prefPath
 sudo chmod -R 775 /home/$userName/.config/*
 sudo chown -R $userName:$userName /home/$userName/.config/*
+sudo sed -i.bak 's/#elif __CUDA_ARCH__ == 500 || __CUDA_ARCH__ == 520/#elif __CUDA_ARCH__ >= 500/g' /usr/share/blender/scripts/addons/cycles/kernel/kernels/cuda/kernel.cu
 
 log "Install UnZip"
 sudo apt-get install unzip -y
