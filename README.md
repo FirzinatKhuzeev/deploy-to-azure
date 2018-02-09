@@ -21,7 +21,8 @@ The image will start to render using GPU.
 
 Troubleshooting:  
 Make sure that **CUDA** is selected as **Compute Device** under **System Settings** within **User Preferences**.
-The deployments is currnetly not working for -	NC-Series VMs. Only NCv2, NV, ND series are supported.
+
+The deployment is currently not working for -	NC-Series VMs. Only NCv2, NV, ND series are supported.
 
 # Deployment  
 
