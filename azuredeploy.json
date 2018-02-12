@@ -180,7 +180,8 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "[concat(parameters('artifactsBaseUrl'), '/scripts/post-install.sh')]"
+                        "[concat(parameters('artifactsBaseUrl'), '/scripts/post-install.sh')]",
+                        "[concat(parameters('artifactsBaseUrl'), '/scripts/email-sender.sh')]"
                     ],
                     "commandToExecute": "[concat('bash post-install.sh ',parameters('adminUsername'),' ',parameters('adminPassword'),' ',parameters('emailTo'),' ',parameters('sendgridApiKey'))]"
                 }
