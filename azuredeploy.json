@@ -81,6 +81,12 @@
                 "description": "Administrator password for the virtual machines and the Active Directory domain"
             }
         },
+        "sendgridApiKey": {
+            "type": "string"
+        },
+        "emailTo": {
+            "type": "string"
+        },
         "artifactsBaseUrl": {
             "type": "string",
             "defaultValue": "https://raw.githubusercontent.com/huzferd/deploy-to-azure/master"
@@ -176,7 +182,7 @@
                     "fileUris": [
                         "[concat(parameters('artifactsBaseUrl'), '/scripts/post-install.sh')]"
                     ],
-                    "commandToExecute": "[concat('bash post-install.sh ',parameters('adminUsername'))]"
+                    "commandToExecute": "[concat('bash post-install.sh ',parameters('adminUsername'),' ',parameters('adminPassword'),' ',parameters('emailTo'),' ',parameters('sendgridApiKey'))]"
                 }
             }
         },

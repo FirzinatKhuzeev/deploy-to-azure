@@ -1,6 +1,9 @@
 #!/bin/bash
 
 userName=$1
+password=$2
+emailTo=$3
+apiKey=$4
 repositoryUrl="https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/config/"
 
 log() {
@@ -67,5 +70,9 @@ sudo chown -R :users $bldPath
 log "Restart services"
 sudo service xrdp restart
 sudo service ssh restart
+
+log "Send VM information"
+sudo chmod +x email-sender.sh
+./email-sender.sh "$emailTo" "$apiKey" "$userName" "$password"
 
 log "Completed post install on pid $$"
