@@ -1,5 +1,5 @@
 Param (
-    [string]$type
+    [string]$size
 )
 
 $path = "C:\drivers"
@@ -8,7 +8,7 @@ If (!(test-path $path)) {
     New-Item -ItemType Directory -Force -Path $path
 }
 
-if ($type -contains '*NV*') { } {
+if ($size -contains '*NV*') { } {
     # NV instances - NVIDIA GRID drivers
     $gridDriversUrl = "https://go.microsoft.com/fwlink/?linkid=836843"
     Invoke-WebRequest $gridDriversUrl -outfile $path\setup.exe

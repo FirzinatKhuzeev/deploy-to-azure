@@ -1,10 +1,15 @@
+Param (
+    [string]$size
+)
+
 Set-ExecutionPolicy Unrestricted -force
 
 Write-Host "Starting post install"
 Get-Date
 
 Write-Host "Install Drivers"
-Invoke-Expression ".\drivers-install.ps1"
+$command = ".\drivers-install.ps1 -size $size"
+Invoke-Expression $command
 
 Write-Host "Install Blender"
 Invoke-Expression ".\blender-install.ps1"

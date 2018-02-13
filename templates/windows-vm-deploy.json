@@ -167,7 +167,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File post-install.ps1"
+                    "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File post-install.ps1 -size ',parameters('virtualMachineSize'))]"
                 }
             }
         },
