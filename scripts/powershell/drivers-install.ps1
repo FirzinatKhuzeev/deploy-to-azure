@@ -8,7 +8,7 @@ If (!(test-path $path)) {
     New-Item -ItemType Directory -Force -Path $path
 }
 
-if ($size -contains '*NV*') { } {
+if ($size -like '*NV*') {
     # NV instances - NVIDIA GRID drivers
     $gridDriversUrl = "https://go.microsoft.com/fwlink/?linkid=836843"
     Invoke-WebRequest $gridDriversUrl -outfile $path\setup.exe

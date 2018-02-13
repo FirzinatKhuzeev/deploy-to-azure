@@ -1,8 +1,10 @@
 # download blender bin, examples and extract
 
 $path = "C:\dist"
+$extractedPath = "$path\extracted"
 $blenderUrl = "https://www.blend4web.com/blender/release/Blender2.79/blender-2.79-windows64.zip"
 $exampleFileUrl = "https://download.blender.org/demo/test/BMW27_2.blend.zip"
+$openglLibUrl = "http://download.blender.org/ftp/sergey/softwaregl/win64/opengl32.dll"
 
 If (!(test-path $path)) {
     New-Item -ItemType Directory -Force -Path $path
@@ -31,3 +33,6 @@ ExpandArchive($filePath)
 
 $filePath = DownloadFile($exampleFileUrl)
 ExpandArchive($filePath)
+
+$filePath = DownloadFile($openglLibUrl)
+Copy-Item $filePath $extractedPath\blender-2.79-windows64
