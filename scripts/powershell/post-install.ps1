@@ -16,3 +16,5 @@ Invoke-Expression ".\blender-install.ps1"
 
 Write-Host "Completed post install"
 Get-Date
+
+Restart-Computer -Force -AsJob
