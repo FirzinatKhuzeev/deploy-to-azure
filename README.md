@@ -1,4 +1,11 @@
 # Deploy N Series VM to Azure  
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?repository=https://github.com/huzferd/deploy-to-azure)
+<a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/azuredeploy.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
+
+
 This Azure deployment demonstrates capabilities of Azure N-Series VMs.
 During the deployment, the following actions will be perfromed by the postdeployment script:
 
@@ -22,11 +29,4 @@ The image will start to render using GPU.
 Troubleshooting:  
 Make sure that **CUDA** is selected as **Compute Device** under **System Settings** within **User Preferences**.
 
-The deployment is currently not working for -	NC-Series VMs. Only NCv2, NV, ND series are supported.
-
-# Deployment  
-
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?repository=https://github.com/huzferd/deploy-to-azure)
-<a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/huzferd/deploy-to-azure/master/azuredeploy.json" target="_blank">
-    <img src="http://armviz.io/visualizebutton.png"/>
-</a>
+The deployment is currently not working for - NC-Series VMs. Only NCv2, NV, ND series are supported.
